@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Contraseña</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Recuperar Contraseña</h2>
+        <div id="paso-1">
+            <input type="text" id="buscar-user" placeholder="Tu usuario">
+            <button onclick="buscarUsuario()">Buscar</button>
+        </div>
+
+        <div id="paso-2" style="display:none;">
+            <p id="pregunta-mostrada"></p>
+            <input type="text" id="respuesta-user" placeholder="Tu respuesta">
+            <button onclick="validarRespuesta()">Ver Contraseña</button>
+        </div>
+        <p id="resultado"></p>
+        <a href="login.html">Volver</a>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>
