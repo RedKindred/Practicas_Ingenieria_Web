@@ -20,7 +20,7 @@ body {
 
 h2 { color: #bb86fc; margin-bottom: 1.5rem; }
 
-input {
+input, select{
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -43,6 +43,37 @@ button {
     margin-top: 10px;
 }
 
+select option {
+    background-color: #2c2c2c;
+    color: white;
+}
+
+
+/* FOCUS */
+input:focus{
+    outline:none;
+    border-color:#4a90e2;
+    box-shadow:0 0 5px rgba(74,144,226,0.3);
+}
+
+/* VALIDACIONES */
+.valido{
+    border:2px solid #2ecc71;
+    background:#f0fff5;
+}
+
+.invalido{
+    border:2px solid #e74c3c;
+    background:#fff5f5;
+}
+
+/* MENSAJES */
+.mensaje{
+    color:#e74c3c;
+    font-size:12px;
+    min-height:14px;
+    margin-top:3px;
+}
 button:hover { background-color: #018786; }
 
 a { color: #03dac6; text-decoration: none; font-size: 0.85rem; display: block; margin-top: 15px; }

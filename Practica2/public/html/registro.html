@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Crear Cuenta</h2>
+
+        <form id="form-registro" action=""   novalidate>
+            <input type="text" id="reg-user" name="Usuario" pattern="[a-zA-Z]{3,20}" 
+             placeholder="Usuario" required autofocus>
+            <span class="mensaje" id="error-nombre"></span>
+
+            <input type="email" id="reg-email" name="correo" placeholder="ejemplo@do.com" required>
+            <span class="mensaje" id="error-correo"></span> 
+
+            <input type="password" id="reg-pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+             placeholder="Contraseña" required>
+            <span class="mensaje" id="error-contrasena"></span>
+
+            <input type="password" id="reg-conf" placeholder="Confirmar Contraseña" required>
+            
+            <select name="pregunta" required>
+                <option value="" disabled selected hidden>pregunta secreta</option>
+                <option value="ma">Nombre de mascota</option>
+                <option value="ci">Lugar de nacimiento</option>
+                <option value="lu">lugar favorito</option>
+            </select>
+        
+            <input type="text" id="reg-resp" name="respuesta" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,30}"
+            placeholder="Respuesta" required>
+            <span class="mensaje" id="error-respuesta"></span>
+
+            <button type="submit">Registrar</button>
+            <p id="msg"></p>
+        </form>
+
+        <a href="../html/login.html">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+
+    <script> scr="../validarFormLogin.js"  </script>
+
+</body>
+</html>
