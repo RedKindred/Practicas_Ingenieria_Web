@@ -15,5 +15,6 @@ const router = express.Router();
 
 router.get("/", mostrarFormulario);
 router.post('/registro',registrarUsuario);
+router.get('/registro',registrarUsuario);
 
 export default router; //la variable sera visible para otros modulos del proyecto
