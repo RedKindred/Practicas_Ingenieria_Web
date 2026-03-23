@@ -9,30 +9,38 @@
     <div class="form-container">
         <h2>Crear Cuenta</h2>
 
-        <form id="form-registro" action=""   novalidate>
-            <input type="text" id="reg-user" name="Usuario" pattern="[a-zA-Z]{3,20}" 
-             placeholder="Usuario" required autofocus>
-            <span class="mensaje" id="error-nombre"></span>
+        <form id="form-registro" action="" novalidate>
 
-            <input type="email" id="reg-email" name="correo" placeholder="ejemplo@do.com" required>
-            <span class="mensaje" id="error-correo"></span> 
+            <input type="text" id="reg-user" name="Usuario"
+                pattern="[a-zA-Z]{3,20}"
+                placeholder="Usuario" required autofocus>
+            <span class="mensaje" id="error-reg-user"></span>
 
-            <input type="password" id="reg-pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-             placeholder="Contraseña" required>
-            <span class="mensaje" id="error-contrasena"></span>
+            <input type="email" id="reg-email" name="correo"
+                placeholder="ejemplo@do.com" required>
+            <span class="mensaje" id="error-reg-email"></span>
 
-            <input type="password" id="reg-conf" placeholder="Confirmar Contraseña" required>
-            
+            <!-- ✅ FIX: agregado name="contraseña" -->
+            <input type="password" id="reg-pass" name="contraseña"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                placeholder="Contraseña" required>
+            <span class="mensaje" id="error-reg-pass"></span>
+
+            <input type="password" id="reg-conf"
+                placeholder="Confirmar Contraseña" required>
+            <span class="mensaje" id="error-reg-conf"></span>
+
             <select name="pregunta" required>
                 <option value="" disabled selected hidden>pregunta secreta</option>
                 <option value="ma">Nombre de mascota</option>
                 <option value="ci">Lugar de nacimiento</option>
-                <option value="lu">lugar favorito</option>
+                <option value="lu">Lugar favorito</option>
             </select>
-        
-            <input type="text" id="reg-resp" name="respuesta" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,30}"
-            placeholder="Respuesta" required>
-            <span class="mensaje" id="error-respuesta"></span>
+
+            <input type="text" id="reg-resp" name="respuesta"
+                pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,30}"
+                placeholder="Respuesta" required>
+            <span class="mensaje" id="error-reg-resp"></span>
 
             <button type="submit">Registrar</button>
             <p id="msg"></p>
@@ -41,7 +49,8 @@
         <a href="../html/login.html">¿Ya tienes cuenta? Inicia sesión</a>
     </div>
 
-    <script> scr="../validarFormLogin.js"  </script>
+    <!-- ✅ FIX: src como atributo del tag, no como contenido -->
+    <script src="../js/validarFormRegistro.js"></script>
 
 </body>
 </html>
