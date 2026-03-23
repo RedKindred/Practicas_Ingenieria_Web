@@ -1,26 +1,68 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+/* 
+   Archivo principal que inicia el servidor.
+   Responsabilidades:
+     1. Configurar Express
+     2. Leer variables de entorno
+     3. Registrar middlewares
+     4. Registrar rutas
+     5. Servir archivos estáticos (assets)
+
+
+  Se requiere configurar el proyecto nodeJS
+  
+  1. Iniciarlizar proyecto
+     npm init -y ------ asigna valores por defecto en 
+                 ------ la configuración de package.json
+
+   2. Instalar dependencias para el proyecto: en este caso
+      Express para el servidor HTTP para procesar peticiones
+      a través de envíos POST y GET.
+
+      npm install express
+
+      npm install --save-dev nodemon
+
+*/
+
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+/*import dotenv from "dotenv"; // npm install dotenv*/
+
+import formRoutes from "./routes/formRoutes.js"; //formRoutes es una variable
+
+// asigna puerto para atender peticiones
+/**
+ * | Rango       | Tipo        | Uso recomendado                                 |
+| ----------- | ----------- | ----------------------------------------------- |
+| 0-1023      | Well-known  | ❌ Reservados (HTTP=80, HTTPS=443, FTP=21, etc.) |
+| 1024-49151  | Registrados | ✅ Desarrollo (3000, 4000, 5000, 8080)           |
+| 49152-65535 | Dinámicos   | ✅ Temporales                                    |
+ */
 const PORT = 3000;
 
-// Middleware para servir archivos estáticos (CSS, JS del cliente, Imágenes)
-// Esto asume que tienes una carpeta 'public'
-app.use(express.static(path.join(__dirname, 'public')));
+// instancia el modulo de express para configurar el servidor
+const app = express();
 
-// Ruta principal para el Login
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'login.html'));
-});
 
-// Rutas para las otras páginas
-app.get('/registro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'registro.html'));
-});
+// habilita la conversión de objetos JSON a objetos JS.
+app.use(express.json());
+// habilita el procesamiento de solicitudes POST/PUT
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/recuperar', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'recuperar.html'));
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+// asocia contenido estático HTML, CSS
+app.use("/", express.static(path.join(__dirname, "public")));
+
+// Rutas
+app.use("/", formRoutes);
+
+
+
+// Se asocia el puerto e inicia el servidor
+app.listen(PORT, () => { //como callback funcion flecha anonima //funciona 
+    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });

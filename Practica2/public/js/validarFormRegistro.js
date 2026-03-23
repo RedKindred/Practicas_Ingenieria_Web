@@ -1,6 +1,6 @@
-const form      = document.getElementById("form-login");
+const form      = document.getElementById("form-registro");
 const resultado = document.getElementById("msg");
-const campos    = ["log-user", "log-email", "log-pass"];
+const campos    = ["reg-user", "reg-email", "reg-pass", "reg-conf", "reg-resp"];
 
 function validarCampo(id) {
     const input = document.getElementById(id);
@@ -18,11 +18,24 @@ function validarCampo(id) {
         return false;
     }
 
+    /* confirmar contraseña */
+    if (id === "reg-conf") {
+        const pass = document.getElementById("reg-pass");
+        if (pass && input.value !== pass.value) {
+            error.textContent = "Las contraseñas no coinciden";
+            input.classList.add("invalido");
+            return false;
+        }
+        input.classList.add("valido");
+        return true;
+    }
+
     /* pattern */
     if (input.validity.patternMismatch) {
         const mensajes = {
-            "log-user": "El usuario debe tener entre 3 y 20 letras (sin espacios ni números)",
-            "log-pass": "Mínimo 8 caracteres: una mayúscula, una minúscula y un número"
+            "reg-user": "El usuario debe tener entre 3 y 20 letras (sin espacios ni números)",
+            "reg-pass": "Mínimo 8 caracteres: una mayúscula, una minúscula y un número",
+            "reg-resp": "La respuesta debe tener entre 2 y 30 letras"
         };
 
         error.textContent = mensajes[id] || "Formato inválido";
@@ -48,7 +61,10 @@ campos.forEach(id => {
     if (!input) return;
 
     input.addEventListener("blur",  () => validarCampo(id));
-    input.addEventListener("input", () => validarCampo(id));
+    input.addEventListener("input", () => {
+        validarCampo(id);
+        if (id === "reg-pass") validarCampo("reg-conf");
+    });
 });
 
 /* submit */
@@ -66,12 +82,14 @@ form.addEventListener("submit", async function(e) {
     }
 
     const datos = {
-        Usuario:    document.getElementById("log-user").value.trim(),
-        correo:     document.getElementById("log-email").value.trim(),
-        contraseña: document.getElementById("log-pass").value
+        Usuario:    document.getElementById("reg-user").value.trim(),
+        correo:     document.getElementById("reg-email").value.trim(),
+        contraseña: document.getElementById("reg-pass").value,
+        pregunta:   form.querySelector("select[name='pregunta']").value,  
+        respuesta:  document.getElementById("reg-resp").value.trim()
     };
 
-    const response = await fetch("/login", {
+    const response = await fetch("/registro", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
