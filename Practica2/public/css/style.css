@@ -60,11 +60,13 @@ input:focus{
 .valido{
     border:2px solid #2ecc71;
     background:#f0fff5;
+    color:#121212;  /* ✅ texto oscuro sobre fondo claro */
 }
 
 .invalido{
     border:2px solid #e74c3c;
     background:#fff5f5;
+    color:#121212;  /* ✅ texto oscuro sobre fondo claro */
 }
 
 /* MENSAJES */

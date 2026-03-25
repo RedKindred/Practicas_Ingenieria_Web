@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="../css/style.css"
-    ">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -12,9 +11,21 @@
         <h2>Inicio de Sesión</h2>
 
         <form id="form-login" novalidate>
-            <input type="text" id="log-user"  placeholder="Usuario" required>
-            <input type="email" id="log-email" placeholder="ejemplo@do.com" required>
-            <input type="password" id="log-pass" placeholder="Contraseña" required>
+
+            <input type="text" id="log-user" name="Usuario"
+                pattern="[a-zA-Z]{3,20}"
+                placeholder="Usuario" required>
+            <span class="mensaje" id="error-log-user"></span>
+
+            <input type="email" id="log-email" name="correo"
+                placeholder="ejemplo@do.com" required>
+            <span class="mensaje" id="error-log-email"></span>
+
+            <input type="password" id="log-pass" name="contraseña"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                placeholder="Contraseña" required>
+            <span class="mensaje" id="error-log-pass"></span>
+
             <button type="submit">Entrar</button>
             <p id="msg"></p>
         </form>
@@ -26,9 +37,7 @@
 
     </div>
 
+    <script src="../js/validarFormLogin.js"></script>
 
-    <script>
-      
-    </script>
 </body>
 </html>
