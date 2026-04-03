@@ -1,6 +1,8 @@
+import bcrypt from "bcrypt"; // npm install bcrypt
+
 // Registro
 export const procesarFormulario = async (datos) => {
-    const { Usuario, correo, contraseña, respuesta } = datos;
+    const { Usuario, correo, contraseña, pregunta, respuesta } = datos;
     const errores = {};
 
     if (!Usuario || !/^[a-zA-Z]{3,20}$/.test(Usuario)) {
@@ -16,6 +18,10 @@ export const procesarFormulario = async (datos) => {
         errores.contraseña = "La contraseña no cumple con los requisitos de seguridad";
     }
 
+    if (!pregunta) {
+        errores.pregunta = "Selecciona una pregunta de seguridad";
+    }
+
     if (!respuesta || !/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,30}$/.test(respuesta)) {
         errores.respuesta = "La respuesta es inválida o demasiado corta";
     }
@@ -24,10 +30,17 @@ export const procesarFormulario = async (datos) => {
         throw new Error(JSON.stringify(errores));
     }
 
+    // Cifrar contraseña y respuesta con bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const contraseñaHash = await bcrypt.hash(contraseña, salt);
+    const respuestaHash  = await bcrypt.hash(respuesta.trim(), salt);
+
     const datosProcesados = {
         Usuario,
         correo,
-        respuesta,
+        contraseña: contraseñaHash,
+        pregunta,
+        respuesta:  respuestaHash,
         fecha: new Date()
     };
 
