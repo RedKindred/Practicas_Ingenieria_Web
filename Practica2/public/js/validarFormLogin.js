@@ -81,5 +81,11 @@ form.addEventListener("submit", async function(e) {
 
     const resultadoServidor = await response.json();
 
-    resultado.textContent = JSON.stringify(resultadoServidor, null, 2);
+    //resultado.textContent = JSON.stringify(resultadoServidor, null, 2);
+
+    if (resultadoServidor.ok) {
+    window.location.href = resultadoServidor.redirigir;
+    } else {
+    resultado.textContent = resultadoServidor.mensaje;
+    }
 });
