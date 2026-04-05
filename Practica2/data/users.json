@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Juan",
+    "correo": "Juan@gmail.com",
+    "contrasena": "$2a$12$oe8ZEXD7gbxcUSF5ocTzmuBm/Zcamxb7Rod6imj1L7hvYZe1iPTzW",
+    "preguntarc": "Color favorito",
+    "respuestarc": "$2a$12$bI82EFYS8kBoMvEHvi62HeQvMgj5Myo/Qs848uh6UMyVnBFBJ1oAO"
+  },
+  {
+    "nombre": "Pedro",
+    "correo": "Pedro@gmail.com",
+    "contrasena": "$2a$12$61X4CJQH9NoYOuedTpWAcO1O0hiZdoYMqgr7ImhbYJrYJHDNtH8F.",
+    "preguntarc": "Lugar favorito",
+    "respuestarc": "$2a$12$4IHW0sLiKQBQqryz57k8Qeyx7X1s7aJIhcjZqLVD7TMNYKNQyZsHa"
+  },
+  {
+    "nombre": "María",
+    "correo": "Maria@gmail.com",
+    "contrasena": "$2a$12$NXylO9/W4jJDvkATDCyh8.xHVU4fGvd7h25l/csKbF71SVBm3F5BC",
+    "preguntarc": "Color favorito",
+    "respuestarc": "$2a$12$qtaQFt3VgMiAVYqlOhjQWeKLvFosmK8gnZhAaU9qaEPeiAGfozebi"
+  }  
+]

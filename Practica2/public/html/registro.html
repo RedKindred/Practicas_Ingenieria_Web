@@ -20,7 +20,7 @@
                 placeholder="ejemplo@do.com" required>
             <span class="mensaje" id="error-reg-email"></span>
 
-            <!-- ✅ FIX: agregado name="contraseña" -->
+            
             <input type="password" id="reg-pass" name="contraseña"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 placeholder="Contraseña" required>
@@ -32,9 +32,9 @@
 
             <select name="pregunta" required>
                 <option value="" disabled selected hidden>pregunta secreta</option>
-                <option value="ma">Nombre de mascota</option>
-                <option value="ci">Lugar de nacimiento</option>
-                <option value="lu">Lugar favorito</option>
+                <option value="Nombre de mascota">Nombre de mascota</option>
+                <option value="Lugar de nacimiento">Lugar de nacimiento</option>
+                <option value="Lugar favorito">Lugar favorito</option>
             </select>
 
             <input type="text" id="reg-resp" name="respuesta"
@@ -46,10 +46,10 @@
             <p id="msg"></p>
         </form>
 
-        <a href="../html/login.html">¿Ya tienes cuenta? Inicia sesión</a>
+        <a href="/login.html">¿Ya tienes cuenta? Inicia sesión</a>
     </div>
 
-    <!-- ✅ FIX: src como atributo del tag, no como contenido -->
+    
     <script src="../js/validarFormRegistro.js"></script>
 
 </body>
