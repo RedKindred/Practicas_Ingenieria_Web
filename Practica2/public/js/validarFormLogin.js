@@ -81,11 +81,9 @@ form.addEventListener("submit", async function(e) {
 
     const resultadoServidor = await response.json();
 
-    //resultado.textContent = JSON.stringify(resultadoServidor, null, 2);
-
-    if (resultadoServidor.ok) {
-    window.location.href = resultadoServidor.redirigir;
+    if (!resultadoServidor.ok) {
+        alert(resultadoServidor.mensaje); // alert si el usuario no existe o credenciales incorrectas
     } else {
-    resultado.textContent = resultadoServidor.mensaje;
+          window.location.href = "/dashboard"
     }
 });

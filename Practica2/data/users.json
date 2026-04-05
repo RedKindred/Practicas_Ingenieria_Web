@@ -35,5 +35,20 @@
     "pregunta": "Nombre de mascota",
     "respuesta": "$2b$10$YA3pPqS/iY7wPV0SuRb1OOV46vGorb8xIdiw8zZB5yYsSx0W6cxpy",
     "fecha": "2026-04-05T07:12:35.084Z"
+  },
+  {
+    "Usuario": "jorge",
+    "correo": "j@gmail.com",
+    "contraseña": "$2b$10$9Pl990Lq4nLpa6PblXMe2.0Rmk6tjEyZU8WXsLOmgLgxFzZLgvcm6",
+    "pregunta": "Nombre de mascota",
+    "respuesta": "$2b$10$0naC1IoHAscQ/nlSoZnH9O406hj4wjjnjwyy0sb/CozTrBocfZFSe",
+    "fecha": "2026-04-05T17:41:42.216Z"
+  },
+  {
+    "Usuario": "gabriel",
+    "correo": "ga@oulook.com",
+    "contraseña": "$2b$10$VZfSJeQufxjI2ibyRKX0cOKsrlXQZ7VT/CQUfF7k56LbSwPX8rlGG",
+    "pregunta": "Lugar de nacimiento",
+    "respuesta": "$2b$10$VZfSJeQufxjI2ibyRKX0cOhUSabBmpGkVNMmD/nfR0iT35IFqucP."
   }
 ]

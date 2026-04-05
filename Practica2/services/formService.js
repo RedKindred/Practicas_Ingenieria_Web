@@ -1,6 +1,6 @@
-import bcrypt from "bcrypt"; // npm install bcrypt
+import bcrypt from "bcrypt";
 
-// Registro
+// ── Registro ──────────────────────────────────────────────────────────────────
 export const procesarFormulario = async (datos) => {
     const { Usuario, correo, contraseña, pregunta, respuesta } = datos;
     const errores = {};
@@ -30,8 +30,7 @@ export const procesarFormulario = async (datos) => {
         throw new Error(JSON.stringify(errores));
     }
 
-    // Cifrar contraseña y respuesta con bcrypt
-    const salt = await bcrypt.genSalt(10);
+    const salt           = await bcrypt.genSalt(10);
     const contraseñaHash = await bcrypt.hash(contraseña, salt);
     const respuestaHash  = await bcrypt.hash(respuesta.trim(), salt);
 
@@ -40,15 +39,15 @@ export const procesarFormulario = async (datos) => {
         correo,
         contraseña: contraseñaHash,
         pregunta,
-        respuesta:  respuestaHash,
-        fecha: new Date()
+        respuesta: respuestaHash
     };
 
-    console.log("Datos listos para el servidor:", datosProcesados);
+    console.log("Usuario registrado en JSON:", JSON.stringify(datosProcesados, null, 2));
+
     return datosProcesados;
 };
 
-// Login
+// ── Login ─────────────────────────────────────────────────────────────────────
 export const procesarLogin = async (datos) => {
     const { Usuario, correo, contraseña } = datos;
     const errores = {};
@@ -69,7 +68,49 @@ export const procesarLogin = async (datos) => {
     if (Object.keys(errores).length > 0) {
         throw new Error(JSON.stringify(errores));
     }
+};
 
-    console.log("Login recibido:", { Usuario, correo, fecha: new Date() });
-    return { Usuario, correo, fecha: new Date() };
+// ── Recuperar: validar respuesta ──────────────────────────────────────────────
+export const procesarRecuperar = async (datos) => {
+    const { correo, respuesta } = datos; // ✅ correo en vez de usuario
+
+    const errores = {};
+
+    if (!correo || !/^\S+@\S+\.\S+$/.test(correo)) { // ✅ validación de correo
+        errores.correo = "Correo electrónico inválido";
+    }
+
+    if (!respuesta || respuesta.trim().length < 2) {
+        errores.respuesta = "La respuesta es obligatoria";
+    }
+
+    if (Object.keys(errores).length > 0) {
+        throw new Error(JSON.stringify(errores));
+    }
+
+    return { correo, respuesta: respuesta.trim() };
+};
+
+// ── Recuperar: cambiar contraseña ─────────────────────────────────────────────
+export const procesarCambiarContrasena = async (datos) => {
+    const { correo, nuevaContrasena } = datos;
+    const errores = {};
+
+    if (!correo || !/^\S+@\S+\.\S+$/.test(correo)) {
+        errores.correo = "Correo electrónico inválido";
+    }
+
+    const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!nuevaContrasena || !passRegex.test(nuevaContrasena)) {
+        errores.nuevaContrasena = "La contraseña no cumple con los requisitos de seguridad";
+    }
+
+    if (Object.keys(errores).length > 0) {
+        throw new Error(JSON.stringify(errores));
+    }
+
+    const salt           = await bcrypt.genSalt(10);
+    const contraseñaHash = await bcrypt.hash(nuevaContrasena, salt);
+
+    return { correo, contraseñaHash };
 };

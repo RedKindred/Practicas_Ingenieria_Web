@@ -1,7 +1,5 @@
 import express from "express";
-//import { mostrarFormulario, registrarUsuario, mostrarLogin, loginUsuario, mostrarRecuperar } from "../controllers/formControllers.js";
-// ✅ Agrega mostrarDashboard:
-import { mostrarFormulario, registrarUsuario, mostrarLogin, loginUsuario, mostrarRecuperar, mostrarDashboard } from "../controllers/formControllers.js";
+import { mostrarFormulario, registrarUsuario, mostrarLogin, loginUsuario, mostrarRecuperar, mostrarDashboard, buscarUsuarioRecuperar, validarRespuestaRecuperar, cambiarContrasena } from "../controllers/formControllers.js";
 
 const router = express.Router();
 
@@ -14,9 +12,13 @@ router.post("/login", loginUsuario);
 router.get("/registro", mostrarFormulario);
 router.post("/registro", registrarUsuario);
 
+// Dashboard
+router.get("/dashboard", mostrarDashboard);
+
 // Recuperar contraseña
 router.get("/recuperar", mostrarRecuperar);
-
-router.get("/dashboard", mostrarDashboard);
+router.post("/recuperar/buscar",   buscarUsuarioRecuperar);
+router.post("/recuperar/validar",  validarRespuestaRecuperar);
+router.post("/recuperar/cambiar",  cambiarContrasena);
 
 export default router;

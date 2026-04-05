@@ -80,4 +80,7 @@ button:hover { background-color: #018786; }
 
 a { color: #03dac6; text-decoration: none; font-size: 0.85rem; display: block; margin-top: 15px; }
 
+a:hover{text-decoration: underline;}
+
+
 #msg { color: #cf6679; font-size: 0.9rem; margin-top: 10px; }
