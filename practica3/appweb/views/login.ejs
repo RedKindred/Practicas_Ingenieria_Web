@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Inicio de Sesión</h2>
+
+        <form id="form-login" novalidate>
+
+            <input type="text" id="log-user" name="Usuario"
+                pattern="[a-zA-Z]{3,20}"
+                placeholder="Usuario" required autofocus>
+            <span class="mensaje" id="error-log-user"></span>
+
+            <input type="email" id="log-email" name="correo"
+                placeholder="ejemplo@do.com" required>
+            <span class="mensaje" id="error-log-email"></span>
+
+            <input type="password" id="log-pass" name="contraseña"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                placeholder="Contraseña" required>
+            <span class="mensaje" id="error-log-pass"></span>
+
+            <button type="submit">Entrar</button>
+            <p id="msg"></p>
+        </form>
+
+        <div class="links">
+            <a href="/registro">Registrarse</a> | 
+            <a href="/recuperar">Olvidé mi contraseña</a>
+        </div>
+
+    </div>
+
+    <script src="../js/validarFormLogin.js"></script>
+
+</body>
+</html>
