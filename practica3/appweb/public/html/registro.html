@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Crear Cuenta</h2>
+
+        <form id="form-registro" action="" novalidate>
+
+            <input type="text" id="reg-user" name="Usuario"
+                pattern="[a-zA-Z]{3,20}"
+                placeholder="Usuario" required >
+            <span class="mensaje" id="error-reg-user"></span>
+
+            <input type="email" id="reg-email" name="correo"
+                placeholder="ejemplo@do.com" required>
+            <span class="mensaje" id="error-reg-email"></span>
+
+            
+            <input type="password" id="reg-pass" name="contraseña"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                placeholder="Contraseña" required>
+            <span class="mensaje" id="error-reg-pass"></span>
+
+            <input type="password" id="reg-conf"
+                placeholder="Confirmar Contraseña" required>
+            <span class="mensaje" id="error-reg-conf"></span>
+
+            <select name="pregunta" required>
+                <option value="" disabled selected hidden>pregunta secreta</option>
+                <option value="Nombre de mascota">Nombre de mascota</option>
+                <option value="Lugar de nacimiento">Lugar de nacimiento</option>
+                <option value="Lugar favorito">Lugar favorito</option>
+            </select>
+
+            <input type="text" id="reg-resp" name="respuesta"
+                pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,30}"
+                placeholder="Respuesta" required>
+            <span class="mensaje" id="error-reg-resp"></span>
+
+            <button type="submit">Registrar</button>
+            <p id="msg"></p>
+        </form>
+
+        <a href="/login">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+
+    
+    <script src="../js/validarFormRegistro.js"></script>
+
+</body>
+</html>
