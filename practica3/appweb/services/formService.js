@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 
-// ✏️ AGREGA al inicio del archivo
 const API_BASE = process.env.API_URL ?? "http://localhost:5000/api/sqlserver";
 
 // ── Registro
@@ -42,7 +41,7 @@ export const processForm = async (datos) => {
     }
 
     // Guarda en SQL Server
-    await fetch(`http://localhost:5000/api/sqlserver/users`, {
+    await fetch(`${API_BASE}/users`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({
@@ -174,10 +173,10 @@ export const cambiarContrasena = async (datos) => {
     const salt           = await bcrypt.genSalt(10);
     const contraseñaHash = await bcrypt.hash(nuevaContrasena, salt);
 
-    await fetch(`${API_BASE}/users/${correo}`), {
-        method:  "PUT",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ contrasena: contraseñaHash })
+   await fetch(`${API_BASE}/users/${correo}`, {    // ← coma, no paréntesis
+    method:  "PUT",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify({ contrasena: contraseñaHash })
     });
 
     return { success: true };

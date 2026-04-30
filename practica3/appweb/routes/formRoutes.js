@@ -1,7 +1,7 @@
 import express from "express";
 import { mostrarFormulario, registrarUsuario, mostrarLogin, loginUsuario, 
     mostrarRecuperar, mostrarDashboard, buscarUsuarioRecuperar, validarRespuestaRecuperar,
-     cambiarContrasenaC } from "../controllers/formControllers.js";
+     cambiarContrasenaC, logout } from "../controllers/formControllers.js";
 
 const router = express.Router();
 
@@ -22,5 +22,8 @@ router.get("/recuperar", mostrarRecuperar);
 router.post("/recuperar/buscar",   buscarUsuarioRecuperar);
 router.post("/recuperar/validar",  validarRespuestaRecuperar);
 router.post("/recuperar/cambiar",  cambiarContrasenaC);
+
+
+router.get("/logout", logout);
 
 export default router;

@@ -101,8 +101,8 @@ export const cambiarContrasenaC = async (req, res) => {
     }
 };
 
-router.get("/logout", (req, res) => {
+export const logout = (req, res) => {
     req.session.destroy(() => {
         res.redirect("/login");
     });
-});
+};

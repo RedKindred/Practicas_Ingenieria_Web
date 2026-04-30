@@ -20,18 +20,6 @@ export const sqlServerConfig = {
 };
 
 
-export const sqlServerConfig = {
-  user:     'IngeWeb',
-  password: 'Password123',
-  server:   'mitnick\\SQLEXPRESS',
-  database: 'ingeweb',
-  options: {
-    encrypt:               false,
-    trustServerCertificate: true,
-  },
-};
-
-
 export const getConnection = async () => {
   try {
     return await sql.connect(sqlServerConfig);
