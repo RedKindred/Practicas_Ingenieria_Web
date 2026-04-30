@@ -1,44 +1,55 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import { processForm, validateUser,buscarUsuario, validarRespuesta, cambiarContrasena } from "../services/formService.js";
+import { processForm, validateUser, buscarUsuario, validarRespuesta, cambiarContrasena } from "../services/formService.js";
 import bcrypt from "bcrypt";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-// ── Dashboard 
+// ── Dashboard
 export const mostrarDashboard = async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/html/dashboard.html"));
+    // ✏️ AGREGA: verificar sesión activa antes de mostrar el dashboard
+    if (!req.session.usuario) {
+        return res.redirect("/login");
+    }
+    // ✏️ AGREGA: pasar el nombre del usuario a la vista EJS
+    res.render("dashboard", { nombre: req.session.usuario.nombre });
 };
 
-// ── Login 
+// ── Login — SIN CAMBIOS
 export const mostrarLogin = async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/html/login.html"));
+    res.render("login");
 };
 
+// ── Registro — SIN CAMBIOS
 export const mostrarFormulario = async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/html/registro.html"));
+    res.render("registro");
 };
 
+// ── Recuperar — SIN CAMBIOS
 export const mostrarRecuperar = async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/html/recuperar.html"));
+    res.render("recuperar");
 };
 
-
-
+// ── Login
 export const loginUsuario = async (req, res) => {
     try {
         const resultado = await validateUser(req.body);
         if (!resultado.success) {
             return res.status(401).json({ ok: false, mensaje: Object.values(resultado.errors)[0] });
         }
+        // ✏️ AGREGA: guardar datos del usuario en la sesión
+        req.session.usuario = {
+            nombre: resultado.data.nombre,
+            correo: resultado.data.correo
+        };
         res.status(200).json({ ok: true, redirigir: "/dashboard" });
     } catch (error) {
         res.status(400).json({ ok: false, mensaje: error.message });
     }
 };
 
-
+// ── Registro — SIN CAMBIOS
 export const registrarUsuario = async (req, res) => {
     try {
         const resultado = await processForm(req.body);
@@ -51,6 +62,7 @@ export const registrarUsuario = async (req, res) => {
     }
 };
 
+// ── Buscar usuario (recuperar paso 1) — SIN CAMBIOS
 export const buscarUsuarioRecuperar = async (req, res) => {
     try {
         const resultado = await buscarUsuario(req.body);
@@ -63,6 +75,7 @@ export const buscarUsuarioRecuperar = async (req, res) => {
     }
 };
 
+// ── Validar respuesta (recuperar paso 2) — SIN CAMBIOS
 export const validarRespuestaRecuperar = async (req, res) => {
     try {
         const resultado = await validarRespuesta(req.body);
@@ -75,6 +88,7 @@ export const validarRespuestaRecuperar = async (req, res) => {
     }
 };
 
+// ── Cambiar contraseña (recuperar paso 3) — SIN CAMBIOS
 export const cambiarContrasenaC = async (req, res) => {
     try {
         const resultado = await cambiarContrasena(req.body);
@@ -86,3 +100,9 @@ export const cambiarContrasenaC = async (req, res) => {
         res.status(400).json({ ok: false, mensaje: error.message });
     }
 };
+
+router.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.redirect("/login");
+    });
+});

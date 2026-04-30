@@ -8,7 +8,7 @@ dotenv.config();
  */
 
 
-/*export const sqlServerConfig = {
+export const sqlServerConfig = {
   user: process.env.SQLSERVER_USER,
   password: process.env.SQLSERVER_PASSWORD,
   server: process.env.SQLSERVER_SERVER,
@@ -18,7 +18,7 @@ dotenv.config();
     trustServerCertificate: true,
   },
 };
-*/
+
 
 export const sqlServerConfig = {
   user:     'IngeWeb',

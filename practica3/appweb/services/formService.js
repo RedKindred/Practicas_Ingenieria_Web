@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
 
+// ✏️ AGREGA al inicio del archivo
+const API_BASE = process.env.API_URL ?? "http://localhost:5000/api/sqlserver";
+
 // ── Registro
 export const processForm = async (datos) => {
     const { Usuario, correo, contraseña, pregunta, respuesta } = datos;
@@ -32,7 +35,7 @@ export const processForm = async (datos) => {
     const respuestaHash  = await bcrypt.hash(respuesta.trim(), salt);
 
     // Verifica si el correo ya existe en SQL Server
-    const respBuscar = await fetch(`http://localhost:5000/api/sqlserver/users/${correo}`);
+    const respBuscar = await fetch(`${API_BASE}/users/${correo}`);
     const existe     = await respBuscar.json();
     if (existe && existe.length > 0) {
         return { success: false, errors: { correo: "El correo ya está registrado" } };
@@ -74,7 +77,7 @@ export const validateUser = async (datos) => {
         throw new Error(JSON.stringify(errores));
     }
 
-    const resp     = await fetch(`http://localhost:5000/api/sqlserver/users/${correo}`);
+    const resp     = await fetch(`${API_BASE}/users/${correo}`);
     const usuarios = await resp.json();
     const user     = usuarios[0];
 
@@ -106,7 +109,7 @@ export const buscarUsuario = async (datos) => {
         throw new Error(JSON.stringify(errores));
     }
 
-    const resp     = await fetch(`http://localhost:5000/api/sqlserver/users/${correo}`);
+    const resp     = await fetch(`${API_BASE}/users/${correo}`);
     const usuarios = await resp.json();
     const user     = usuarios[0];
 
@@ -135,7 +138,7 @@ export const validarRespuesta = async (datos) => {
         throw new Error(JSON.stringify(errores));
     }
 
-    const resp     = await fetch(`http://localhost:5000/api/sqlserver/users/${correo}`);
+    const resp     = await fetch(`${API_BASE}/users/${correo}`);
     const usuarios = await resp.json();
     const user     = usuarios[0];
 
@@ -171,7 +174,7 @@ export const cambiarContrasena = async (datos) => {
     const salt           = await bcrypt.genSalt(10);
     const contraseñaHash = await bcrypt.hash(nuevaContrasena, salt);
 
-    await fetch(`http://localhost:5000/api/sqlserver/users/${correo}`, {
+    await fetch(`${API_BASE}/users/${correo}`), {
         method:  "PUT",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ contrasena: contraseñaHash })
