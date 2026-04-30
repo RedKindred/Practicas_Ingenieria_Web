@@ -18,8 +18,8 @@
       Express para el servidor HTTP para procesar peticiones
       a través de envíos POST y GET.
 
-      npm install express
-
+      npm install express-session
+      npm install ejs
       npm install --save-dev nodemon
 
 */
